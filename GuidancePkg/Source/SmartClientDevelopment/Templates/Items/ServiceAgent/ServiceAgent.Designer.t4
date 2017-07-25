@@ -1,0 +1,39 @@
+<#@ template language="C#" #>
+<#@ assembly name="System.dll" #>
+<#@ assembly Name="EnvDTE.dll" #>
+<#@ import namespace="EnvDTE" #>
+<#@ property processor="PropertyProcessor" name="ServiceProxyInterface" #>
+<#@ property processor="PropertyProcessor" name="ServiceInterface" #>
+<#@ property processor="PropertyProcessor" name="InterfaceName" #>
+<#@ property processor="PropertyProcessor" name="BussinessObjectsNameSpace" #>
+<#@ assembly Name="SmartClientDevelopment.dll" #>
+<#@ import namespace="Microsoft.Practices.GuidanceAutomation.SmartClient" #>
+using System;
+using <#= BussinessObjectsNameSpace.FullName #>;
+using $rootnamespace$.<#= InterfaceName #>Callbacks;
+using <#= ServiceProxyInterface.Namespace.Name #>Service = <#= ServiceProxyInterface.Namespace.FullName #>;
+
+namespace $rootnamespace$
+{
+	partial class $safeitemname$ : <#= InterfaceName #>
+	{
+	  private <#= ServiceProxyInterface.Namespace.Name #>Service.<#= ServiceProxyInterface.Name #> _serviceProxy;
+	  
+		private T FromClientToServer<T>(T t)
+		{
+			return t;
+		}
+
+		private T FromServerToClient<T>(T t)
+		{
+			return t;
+		}
+	  
+<# 
+foreach(CodeFunction codeFunction in ServiceInterface.Members)
+{
+  T4Util.WriteInterfaceImpl(this,codeFunction,InterfaceName);
+}
+#>
+	}
+}

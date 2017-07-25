@@ -1,0 +1,36 @@
+<#@ template language="C#" #>
+<#@ assembly name="System.dll" #>
+<#@ assembly Name="EnvDTE.dll" #>
+<#@ import namespace="EnvDTE" #>
+<#@ property processor="PropertyProcessor" name="ServiceProxyClass" #>
+<#@ property processor="PropertyProcessor" name="ServiceProxyInterface" #>
+<#@ property processor="PropertyProcessor" name="BussinessObjectsNameSpace" #>
+<#@ assembly Name="SmartClientDevelopment.dll" #>
+<#@ import namespace="Microsoft.Practices.GuidanceAutomation.SmartClient" #>
+using System;
+using <#= BussinessObjectsNameSpace.FullName #>;
+using <#= ServiceProxyInterface.Namespace.Name #>Service = <#= ServiceProxyInterface.Namespace.FullName #>;
+
+namespace $rootnamespace$
+{
+	public partial class $safeitemname$
+	{
+		private const int TIMEOUT = 10000;
+	
+		public $safeitemname$(<#= ServiceProxyInterface.Namespace.Name #>Service.<#= ServiceProxyInterface.Name #> <#= ServiceProxyInterface.Name #>)
+		{
+			_serviceProxy = <#= ServiceProxyInterface.Name #>;
+		}
+		
+		public $safeitemname$()
+			:this(new <#= ServiceProxyInterface.Namespace.Name #>Service.<#= ServiceProxyClass.Name #>())
+		{
+		}
+		
+		///
+		/// TODO: Add custom conversion routines between client and server layers
+		///
+		//private ClientLayer.ClientType  FromServerToClient(ServiceLayer.ServerType t) { ... }
+		//private ServiceLayer.ServerType FromClientToServer(ClientLayer.ClientType t)  { ... }
+	}
+}

@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7B36143E-9B1A-455D-83A7-40AA6617C02F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>GlobalBank.BranchSystems.Module.Tests</RootNamespace>
+    <AssemblyName>GlobalBank.BranchSystems.Module.Tests</AssemblyName>
+    <WarningLevel>4</WarningLevel>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.CompositeUI, Version=1.0.51205.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SolutionDir)Lib\Microsoft.Practices.CompositeUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.CompositeUI.WinForms, Version=1.0.51205.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SolutionDir)Lib\Microsoft.Practices.CompositeUI.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ObjectBuilder, Version=1.0.51205.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SolutionDir)Lib\Microsoft.Practices.ObjectBuilder.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\WINDOWS\assembly\GAC_MSIL\Microsoft.VisualStudio.QualityTools.UnitTestFramework\8.0.0.0__b03f5f7f11d50a3a\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Mocks\MockCustomerAccountService.cs" />
+    <Compile Include="Mocks\MockAlertService.cs" />
+    <Compile Include="Mocks\MockCurrentQueueEntryService.cs" />
+    <Compile Include="Mocks\MockCustomerFinderService.cs" />
+    <Compile Include="Mocks\MockCustomerQueueService.cs" />
+    <Compile Include="Mocks\MockQueueService.cs" />
+    <Compile Include="Mocks\MockUIElementAdapter.cs" />
+    <Compile Include="Mocks\MockUIElementFactory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CurrentQueueEntryServiceFixture.cs" />
+    <Compile Include="Services\CustomerQueueManagementViewPresenterFixture.cs" />
+    <Compile Include="Views\AddVisitorToQueueViewPresenterFixture.cs" />
+    <Compile Include="Views\CustomerSummaryViewPresenterFixture.cs" />
+    <Compile Include="Views\FindCustomerResultsViewPresenterFixture.cs" />
+    <Compile Include="Views\FindCustomerViewFixture.cs" />
+    <Compile Include="Views\FindCustomerViewPresenterFixture.cs" />
+    <Compile Include="Views\OfficerOperationsViewPresenterFixture.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Library\UnitTest.Library.csproj">
+      <Project>{9F472F91-7E21-408D-821A-D8E996D69DDF}</Project>
+      <Name>UnitTest.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Source\Src\BranchSystems\Module\BranchSystems.Module.csproj">
+      <Project>{631B8A59-14CC-474C-8FA6-7615F295FC19}</Project>
+      <Name>BranchSystems.Module</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Source\Src\BranchSystems\Interface\BranchSystems.Interface.csproj">
+      <Project>{D9DC6CBB-F416-4CB0-833B-C0AA248E0A3C}</Project>
+      <Name>BranchSystems.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Source\Src\Infrastructure\Interface\Infrastructure.Interface.csproj">
+      <Project>{44CA49D0-9245-4BA1-A3CB-DA3735B9558F}</Project>
+      <Name>Infrastructure.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Source\Src\Infrastructure\Library\Infrastructure.Library.csproj">
+      <Project>{1B5478B7-41FF-4DAF-B7D6-9C8B5F61B944}</Project>
+      <Name>Infrastructure.Library</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
+</Project>

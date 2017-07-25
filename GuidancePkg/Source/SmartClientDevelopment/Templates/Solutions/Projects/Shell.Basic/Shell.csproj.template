@@ -1,0 +1,107 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+		<ProductVersion>8.0.50727</ProductVersion>
+		<SchemaVersion>2.0</SchemaVersion>
+		<ProjectGuid>{92DC10E6-DDE9-4892-9798-B57D5FBAA291}</ProjectGuid>
+		<OutputType>WinExe</OutputType>
+		<AppDesignerFolder>Properties</AppDesignerFolder>
+		<RootNamespace>$RootNamespace$.Infrastructure.Shell</RootNamespace>
+		<AssemblyName>$RootNamespace$.Infrastructure.Shell</AssemblyName>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+		<OutputPath>$(SolutionDir)bin\Debug\</OutputPath>
+		<DefineConstants>DEBUG;TRACE</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+		<Optimize>true</Optimize>
+		<OutputPath>$(SolutionDir)bin\Release\</OutputPath>
+		<DefineConstants>TRACE</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+	</PropertyGroup>
+	<ItemGroup>
+		<Reference Include="Accessibility" />
+		<Reference Include="Microsoft.Practices.CompositeUI, Version=1.0.51205.0, Culture=neutral, processorArchitecture=MSIL">
+			<SpecificVersion>False</SpecificVersion>
+			<HintPath>$(SolutionDir)\Lib\Microsoft.Practices.CompositeUI.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Practices.CompositeUI.WinForms, Version=1.0.51205.0, Culture=neutral, processorArchitecture=MSIL">
+			<SpecificVersion>False</SpecificVersion>
+			<HintPath>$(SolutionDir)\Lib\Microsoft.Practices.CompositeUI.WinForms.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Practices.ObjectBuilder, Version=1.0.51205.0, Culture=neutral, processorArchitecture=MSIL">
+			<SpecificVersion>False</SpecificVersion>
+			<HintPath>$(SolutionDir)\Lib\Microsoft.Practices.ObjectBuilder.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+			<SpecificVersion>False</SpecificVersion>
+			<HintPath>$(SolutionDir)\Lib\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Practices.EnterpriseLibrary.ExceptionHandling, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+			<SpecificVersion>False</SpecificVersion>
+			<HintPath>$(SolutionDir)\Lib\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+			<SpecificVersion>False</SpecificVersion>
+			<HintPath>$(SolutionDir)\Lib\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+			<SpecificVersion>False</SpecificVersion>
+			<HintPath>$(SolutionDir)\Lib\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
+		</Reference>
+		<Reference Include="System" />
+		<Reference Include="System.configuration" />
+		<Reference Include="System.Data" />
+		<Reference Include="System.Deployment" />
+		<Reference Include="System.Drawing" />
+		<Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+		<Reference Include="System.Security" />
+		<Reference Include="System.Windows.Forms" />
+		<Reference Include="System.Xml" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Include="ShellApplication.cs" />
+		<Compile Include="Constants\CommandNames.cs" />
+		<Compile Include="Constants\EventTopicNames.cs" />
+		<Compile Include="Constants\UIExtensionSiteNames.cs" />
+		<Compile Include="Constants\WorkspaceNames.cs" />
+		<Compile Include="Properties\AssemblyInfo.cs" />
+		<EmbeddedResource Include="ShellForm.resx">
+			<SubType>Designer</SubType>
+			<DependentUpon>ShellForm.cs</DependentUpon>
+		</EmbeddedResource>
+		<Compile Include="ShellForm.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Include="ShellForm.Designer.cs">
+			<DependentUpon>ShellForm.cs</DependentUpon>
+		</Compile>
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="ProfileCatalog.xml">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Infrastructure.Interface\Infrastructure.Interface.csproj">
+			<Project>{BE39A9ED-D4C6-42E7-91D6-63D9B1D185C6}</Project>
+			<Name>Infrastructure.Interface</Name>
+		</ProjectReference>
+		<ProjectReference Include="..\Infrastructure.Library\Infrastructure.Library.csproj">
+			<Project>{1B5478B7-41FF-4DAF-B7D6-9C8B5F61B944}</Project>
+			<Name>Infrastructure.Library</Name>
+		</ProjectReference>
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="App.config" />
+	</ItemGroup>
+	<Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

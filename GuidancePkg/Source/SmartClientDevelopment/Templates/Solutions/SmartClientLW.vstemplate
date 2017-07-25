@@ -1,0 +1,36 @@
+﻿<VSTemplate 
+	Version="2.0" 
+	Type="ProjectGroup"
+	xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+	<TemplateData>
+		<Name>Light Weight Smart Client</Name>
+		<Description>Creates a smart client application that uses CAB and Enterprise Library</Description>
+		<ProjectType>CSharp</ProjectType>
+		<SortOrder>90</SortOrder>
+		<Icon>__TemplateIcon.ico</Icon>
+		<CreateNewFolder>false</CreateNewFolder>
+		<DefaultName>SmartClientDevelopmentSolution</DefaultName>
+		<ProvideDefaultName>true</ProvideDefaultName>
+	</TemplateData>
+	<TemplateContent>
+		<ProjectCollection>
+			<SolutionFolder Name="Solution Items">
+			</SolutionFolder>
+			<SolutionFolder Name="Source">
+				<SolutionFolder Name="Infrastructure">
+					<ProjectTemplateLink ProjectName="Shell">Projects\Shell\Shell.LW.vstemplate</ProjectTemplateLink>
+					<ProjectTemplateLink ProjectName="Infrastructure.Interface">Projects\Infrastructure\Infrastructure.vstemplate</ProjectTemplateLink>
+				</SolutionFolder>
+			</SolutionFolder>
+		</ProjectCollection>
+	</TemplateContent>
+	<WizardExtension>
+		<Assembly>Microsoft.Practices.RecipeFramework.VisualStudio, Version=1.0.51206.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Assembly>
+		<FullClassName>Microsoft.Practices.RecipeFramework.VisualStudio.Templates.UnfoldTemplate</FullClassName>
+	</WizardExtension>
+	<WizardData>
+		<Template xmlns="http://schemas.microsoft.com/pag/gax-template"
+				SchemaVersion="1.0" Recipe="CreateSolution">
+		</Template>
+	</WizardData>
+</VSTemplate>

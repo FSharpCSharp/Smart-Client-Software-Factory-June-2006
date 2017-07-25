@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetAppraisals">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="filter" type="tns:AppraisalFilter" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="AppraisalFilter">
+        <s:restriction base="s:string">
+          <s:enumeration value="MyAppraisals" />
+          <s:enumeration value="Unassigned" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetAppraisalsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAppraisalsResult" type="tns:ArrayOfAppraisal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfAppraisal">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Appraisal" nillable="true" type="tns:Appraisal" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Appraisal">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateToComplete" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="PropertyAddress" type="tns:Address" />
+          <s:element minOccurs="1" maxOccurs="1" name="PropertyType" type="tns:PropertyType" />
+          <s:element minOccurs="0" maxOccurs="1" name="AssignedTo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Notes" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Attachments" type="tns:ArrayOfAttachmentMetadata" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Address">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Street1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Street2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Zip" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="PropertyType">
+        <s:restriction base="s:string">
+          <s:enumeration value="ResidentialSingleFamily" />
+          <s:enumeration value="ResidentialCondoOrTownhouse" />
+          <s:enumeration value="ResidentialMultiFamily" />
+          <s:enumeration value="ResidentialMobileHome" />
+          <s:enumeration value="ResidentialLand" />
+          <s:enumeration value="CommercialIndustrial" />
+          <s:enumeration value="CommercialLand" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfAttachmentMetadata">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AttachmentMetadata" nillable="true" type="tns:AttachmentMetadata" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AttachmentMetadata">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Url" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="LockAppraisal">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="appraisalId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LockAppraisalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LockAppraisalResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReleaseAppraisal">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="appraisalId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReleaseAppraisalResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetAppraisalsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAppraisals" />
+  </wsdl:message>
+  <wsdl:message name="GetAppraisalsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAppraisalsResponse" />
+  </wsdl:message>
+  <wsdl:message name="LockAppraisalSoapIn">
+    <wsdl:part name="parameters" element="tns:LockAppraisal" />
+  </wsdl:message>
+  <wsdl:message name="LockAppraisalSoapOut">
+    <wsdl:part name="parameters" element="tns:LockAppraisalResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReleaseAppraisalSoapIn">
+    <wsdl:part name="parameters" element="tns:ReleaseAppraisal" />
+  </wsdl:message>
+  <wsdl:message name="ReleaseAppraisalSoapOut">
+    <wsdl:part name="parameters" element="tns:ReleaseAppraisalResponse" />
+  </wsdl:message>
+  <wsdl:portType name="AppraisalManagementServiceSoap">
+    <wsdl:operation name="GetAppraisals">
+      <wsdl:input message="tns:GetAppraisalsSoapIn" />
+      <wsdl:output message="tns:GetAppraisalsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LockAppraisal">
+      <wsdl:input message="tns:LockAppraisalSoapIn" />
+      <wsdl:output message="tns:LockAppraisalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReleaseAppraisal">
+      <wsdl:input message="tns:ReleaseAppraisalSoapIn" />
+      <wsdl:output message="tns:ReleaseAppraisalSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AppraisalManagementServiceSoap" type="tns:AppraisalManagementServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAppraisals">
+      <soap:operation soapAction="http://tempuri.org/GetAppraisals" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LockAppraisal">
+      <soap:operation soapAction="http://tempuri.org/LockAppraisal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReleaseAppraisal">
+      <soap:operation soapAction="http://tempuri.org/ReleaseAppraisal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AppraisalManagementServiceSoap12" type="tns:AppraisalManagementServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAppraisals">
+      <soap12:operation soapAction="http://tempuri.org/GetAppraisals" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LockAppraisal">
+      <soap12:operation soapAction="http://tempuri.org/LockAppraisal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReleaseAppraisal">
+      <soap12:operation soapAction="http://tempuri.org/ReleaseAppraisal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AppraisalManagementService">
+    <wsdl:port name="AppraisalManagementServiceSoap" binding="tns:AppraisalManagementServiceSoap">
+      <soap:address location="http://localhost:1428/AppraisalService/AppraisalManagementService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AppraisalManagementServiceSoap12" binding="tns:AppraisalManagementServiceSoap12">
+      <soap12:address location="http://localhost:1428/AppraisalService/AppraisalManagementService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

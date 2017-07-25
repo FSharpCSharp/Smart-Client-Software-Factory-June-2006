@@ -1,0 +1,97 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D3605709-E694-40FE-95B4-CBCAC049056D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GlobalBank.BranchSystems.ServiceProxies</RootNamespace>
+    <AssemblyName>GlobalBank.BranchSystems.ServiceProxies</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AlertsService.cs" />
+    <Compile Include="CustomerFinderService.cs" />
+    <Compile Include="CustomerProductsService.cs" />
+    <Compile Include="CustomerQueueService.cs" />
+    <Compile Include="BranchSystems.Proxies.cs" />
+    <Compile Include="EntityTranslators\AccountTranslator.cs" />
+    <Compile Include="EntityTranslators\AddressTranslator.cs" />
+    <Compile Include="EntityTranslators\AlertTranslator.cs" />
+    <Compile Include="EntityTranslators\CreditCardTranslator.cs" />
+    <Compile Include="EntityTranslators\CustomerTranslator.cs" />
+    <Compile Include="EntityTranslators\EmailAddressTranslator.cs" />
+    <Compile Include="EntityTranslators\PhoneNumberTranslator.cs" />
+    <Compile Include="EntityTranslators\QueueEntryTranslator.cs" />
+    <Compile Include="EntityTranslators\QuoteTranslator.cs" />
+    <Compile Include="EntityTranslators\RateTranslator.cs" />
+    <Compile Include="EntityTranslators\WalkinTranslator.cs" />
+    <Compile Include="IAlertsServiceProxy.cs" />
+    <Compile Include="ICustomerFinderServiceProxy.cs" />
+    <Compile Include="ICustomerProductsServiceProxy.cs" />
+    <Compile Include="ICustomerQueueServiceProxy.cs" />
+    <Compile Include="IQuoteServiceProxy.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="QuoteService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\Interface\Infrastructure.Interface.csproj">
+      <Project>{44CA49D0-9245-4BA1-A3CB-DA3735B9558F}</Project>
+      <Name>Infrastructure.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\Library\Infrastructure.Library.csproj">
+      <Project>{1B5478B7-41FF-4DAF-B7D6-9C8B5F61B944}</Project>
+      <Name>Infrastructure.Library</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,34 @@
+<#@ template language="C#" #>
+<#@ assembly name="System.dll" #>
+<#@ assembly Name="EnvDTE.dll" #>
+<#@ import namespace="EnvDTE" #>
+<#@ assembly Name="SmartClientDevelopment.dll" #>
+<#@ import namespace="Microsoft.Practices.GuidanceAutomation.SmartClient" #>
+<#@ property processor="PropertyProcessor" name="ServiceInterface" #>
+<#@ property processor="PropertyProcessor" name="BussinessObjectsNameSpace" #>
+using System;
+using <#= BussinessObjectsNameSpace.FullName #>;
+using $rootnamespace$.$safeitemname$Callbacks;
+
+namespace $rootnamespace$
+{
+	namespace $safeitemname$Callbacks
+	{
+<# 
+foreach(CodeFunction codeFunction in ServiceInterface.Members)
+{
+  T4Util.WriteDelegateDecl(this,codeFunction);
+}
+#>
+	}
+	
+	public interface $safeitemname$
+	{
+<# 
+foreach(CodeFunction codeFunction in ServiceInterface.Members)
+{
+  T4Util.WriteInterfaceDecl(this,codeFunction,"$safeitemname$");
+}
+#>
+	}
+}

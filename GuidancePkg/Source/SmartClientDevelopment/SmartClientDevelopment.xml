@@ -1,0 +1,967 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<GuidancePackage xmlns="http://schemas.microsoft.com/pag/gax-core" 
+    Name="guidDD259E37_02BB_4b1c_9F14_737F534EEE22" 
+    Caption="Smart Client Development(Custom)"
+    Description="Smart Client Development"
+    BindingRecipe="BindingRecipe"
+    Guid="DD259E37-02BB-4b1c-9F14-737F534EEE22" 
+    SchemaVersion="1.0">
+  <Overview Url="Templates\Items\Documentation\Intro.htm" />
+  <HostData>
+    <Menu Name="SCFItem" Text="Smart Client Factory">
+      <CommandBar Name="Item"/>
+    </Menu>
+    <Menu Name="SCFProject" Text="Smart Client Factory">
+      <CommandBar Name="Project"/>
+    </Menu>
+    <Menu Name="SCFProjectFolder" Text="Smart Client Factory">
+      <CommandBar Name="Folder"/>
+    </Menu>
+    <Menu Name="SCFSolution" Text="Smart Client Factory">
+      <CommandBar Name="Solution"/>
+    </Menu>
+    <Menu Name="SCFSolutionFolder" Text="Smart Client Factory">
+      <CommandBar Name="Solution Folder"/>
+    </Menu>
+    <Menu Name="SCF1075" Text="Smart Client Factory">
+      <CommandBar Guid="d309f791-903f-11d0-9efc-00a0c911004f" ID="1075"/>
+    </Menu>
+  </HostData>
+  <Recipes>
+    <Recipe Name="BindingRecipe">
+      <!-- This recipe will not appear on Guidance Navigator -->
+      <Types>
+        <TypeAlias Name="RefCreator" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.Actions.CreateUnboundReferenceAction, GATLibrary"/>
+      </Types>
+      <Caption>Creates unbound references to the guidance package</Caption>
+      <Actions>
+        <Action Name="ModuleRef"
+						Type="RefCreator" 
+						AssetName="Projects\Module\ModuleHandle.vstemplate"
+						ReferenceType="Microsoft.Practices.GuidanceAutomation.SmartClient.References.ModuleTemplateReference, SmartClientDevelopment" />
+        <Action Name="BusinessModuleRef"
+						Type="RefCreator"
+						AssetName="Projects\Module.Business\BusinessModuleHandle.vstemplate"
+					ReferenceType="Microsoft.Practices.GuidanceAutomation.SmartClient.References.ModuleTemplateReference, SmartClientDevelopment" />
+        <Action Name="CreateViewRef" 
+						Type="RefCreator" 
+						AssetName="CreateView"
+						ReferenceType="Microsoft.Practices.GuidanceAutomation.SmartClient.References.ViewTemplateReference, SmartClientDevelopment" />
+        <Action Name="AddEventSubscriptionRef" 
+						Type="RefCreator" 
+						AssetName="AddEventSubscription"
+						ReferenceType="Microsoft.Practices.GuidanceAutomation.SmartClient.References.AddEventSubscriptionRecipeReference, SmartClientDevelopment" />
+        <Action Name="AddEventPublication"
+						Type="RefCreator"
+						AssetName="AddEventPublication"
+						ReferenceType="Microsoft.Practices.GuidanceAutomation.SmartClient.References.AddEventSubscriptionRecipeReference, SmartClientDevelopment" />
+        <Action Name="AddAsyncWebServiceProxyRef"
+						Type="RefCreator"
+						AssetName="AddAsyncWebServiceProxy"
+						ReferenceType="Microsoft.Practices.GuidanceAutomation.SmartClient.References.AddAsyncWebServiceProxyRecipeReference, SmartClientDevelopment" />
+      </Actions>
+    </Recipe>
+    <Recipe Name="CreateSolution">
+      <!-- This recipe will not appear on Guidance Navigator because this recipe only collects the arguments for the solution templat
+           and cannot be used by itself -->
+      <Types>
+        <TypeAlias Name="Evaluator" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.ValueProviders.ExpressionEvaluatorValueProvider,GATLibrary"/>
+      </Types>
+      <Caption>Creates a new Smart Client Solution</Caption>
+      <Arguments>
+        <Argument Name="CAB_Folder" Required="true" Type="System.String">
+          <Converter Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Converters.FolderSearchValidator, SmartClientDevelopment"
+							Files="Microsoft.Practices.CompositeUI.dll;Microsoft.Practices.CompositeUI.WinForms.dll;Microsoft.Practices.ObjectBuilder.dll"/>
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.FolderProvider, SmartClientDevelopment"/>
+        </Argument>
+        <Argument Name="EntLib_Folder" Required="true">
+          <Converter Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Converters.FolderSearchValidator, SmartClientDevelopment"
+							Files="Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll;Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll;Microsoft.Practices.EnterpriseLibrary.Logging.dll;Microsoft.Practices.EnterpriseLibrary.Common.dll"/>
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.FolderProvider, SmartClientDevelopment"/>
+        </Argument>
+        <Argument Name="InterfaceProject" Type="EnvDTE.Project, EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.GetProjectByNameProvider, SmartClientDevelopment"
+							ProjectName="Infrastructure.Interface" />
+        </Argument>
+        <Argument Name="RootNamespace" Required="true"/>
+        <Argument Name="InfrastructureSolutionFolder" Type="EnvDTE.Project, EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.GetProjectByNameProvider, SmartClientDevelopment"
+							ProjectName="Infrastructure" />
+        </Argument>
+        <Argument Name="UseExtendedShell" Type="System.Boolean">
+          <ValueProvider Type="Evaluator" Expression="true" />
+        </Argument>
+        <Argument Name="ShowDocsAfterRunning" Type="System.Boolean">
+          <ValueProvider Type="Evaluator" Expression="true" />
+        </Argument>
+      </Arguments>
+      <GatheringServiceData>
+        <Wizard xmlns="http://schemas.microsoft.com/pag/gax-wizards" SchemaVersion="1.0" Help="ms-help://MS.VSCC.v80/MS.VSIPCC.v80/ms.scsf.2006jun/SCSF/html/03-210-Creating%20a%20Smart%20Client%20Solution.htm">
+          <Pages>
+            <Page>
+              <Title>Smart Client Solution</Title>
+              <Fields>
+                <Field ValueName="CAB_Folder" Label="Location of CAB DLLs:" InvalidValueMessage="This directory does not appear to contain the CAB DLLs">
+                  <Editor
+										Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Editors.FolderChooser,SmartClientDevelopment"
+									/>
+                </Field>
+                <Field ValueName="EntLib_Folder" Label="Location of Enterprise Library DLLs:" InvalidValueMessage="This directory does not appear to contain the Enterprise Library DLLs">
+                  <Editor
+										Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Editors.FolderChooser,SmartClientDevelopment"
+									/>
+                </Field>
+                <Field ValueName="RootNamespace" Label="Root namespace:"/>
+                <Field ValueName="UseExtendedShell" Label="Create a separate module to define the layout for the shell" />
+                <Field ValueName="ShowDocsAfterRunning" Label="Show related documentation after running the recipe" />
+              </Fields>
+            </Page>
+          </Pages>
+        </Wizard>
+      </GatheringServiceData>
+      <Actions>
+        <!-- Folder creation & library files copy -->
+        <Action Name="CreateSolutionDirectory" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.CreateSolutionDirectoryAction, SmartClientDevelopment" 
+						DirectoryName="Lib">
+          <Output Name="FullPath"/>
+        </Action>
+        <Action Name="CopyCABDLLs" 
+						Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.FileCopyAction, SmartClientDevelopment"
+						FileNames="Microsoft.Practices.CompositeUI.dll;Microsoft.Practices.CompositeUI.WinForms.dll;Microsoft.Practices.ObjectBuilder.dll">
+          <Input Name="SourceDir" RecipeArgument="CAB_Folder"/>
+          <Input Name="TargetDir" ActionOutput="CreateSolutionDirectory.FullPath"/>
+        </Action>
+        <Action Name="CopyEntLibDLLs" 
+						Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.FileCopyAction, SmartClientDevelopment"
+						FileNames="Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll;Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll;Microsoft.Practices.EnterpriseLibrary.Logging.dll;Microsoft.Practices.EnterpriseLibrary.Common.dll">
+          <Input Name="SourceDir" RecipeArgument="EntLib_Folder"/>
+          <Input Name="TargetDir" ActionOutput="CreateSolutionDirectory.FullPath"/>
+        </Action>
+
+        <!-- Unfold the shell and layout projects -->
+        <Action Name="CreateShellProjects" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.CreateShellProjectAction, SmartClientDevelopment"
+						BasicShellTemplate="Solutions\Projects\Shell.Basic\Shell.vstemplate"
+						ExtendedShellTemplate="Solutions\Projects\Shell.Extended\Shell.vstemplate" 
+						LayoutTemplate="Solutions\Projects\Shell.LayoutModule\Shell.Layout.vstemplate"
+						ShellProjectName="Shell"
+						LayoutProjectName="Infrastructure.Layout" 
+						DestinationDirectory="Source\Infrastructure">
+          <Input Name="UseExtendedShell" RecipeArgument="UseExtendedShell"/>
+          <Input Name="Root" RecipeArgument="InfrastructureSolutionFolder"/>
+          <Output Name="ShellProject"/>
+          <Output Name="LayoutProject"/>
+        </Action>
+
+        <!-- Set the Shell as the start up project -->
+        <Action Name="SetShellAsStartUp" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.SetProjectStartup, SmartClientDevelopment">
+          <Input Name="Project" ActionOutput="CreateShellProjects.ShellProject"/>
+        </Action>
+
+        <!-- Save solution constants -->
+        <Action Name="GetShellProjectGuid" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.GetProjectGuid, SmartClientDevelopment">
+          <Input Name="Project" ActionOutput="CreateShellProjects.ShellProject"/>
+          <Output Name="Guid"/>
+        </Action>
+        <Action Name="SaveShellProjectGuid" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.SetGlobalValueAction, SmartClientDevelopment"
+						PersistValue="true" ValueName="ShellProjectGuid">
+          <Input Name="Value" ActionOutput="GetShellProjectGuid.Guid"/>
+        </Action>
+        <Action Name="GetInterfaceProjectGuid" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.GetProjectGuid, SmartClientDevelopment">
+          <Input Name="Project" RecipeArgument="InterfaceProject"/>
+          <Output Name="Guid"/>
+        </Action>
+        <Action Name="SaveCommonProjectGuid" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.SetGlobalValueAction, SmartClientDevelopment"
+						PersistValue="true" ValueName="CommonProjectGuid">
+          <Input Name="Value" ActionOutput="GetInterfaceProjectGuid.Guid" />
+        </Action>
+        <Action Name="SaveRootNamespace" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.SetGlobalValueAction, SmartClientDevelopment"
+						PersistValue="true" ValueName="RootNamespace">
+          <Input Name="Value" RecipeArgument="RootNamespace"/>
+        </Action>
+
+        <!-- Display the HTML information page -->
+        <Action Name="ShowCreateSolutionHelp" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.ShowUrlAction, SmartClientDevelopment"
+						Url="ms-help://MS.VSCC.v80/MS.VSIPCC.v80/ms.scsf.2006jun/SCSF/html/03-220-Smart%20Client%20Application%20Template.htm">
+          <Input Name="ShowDocs" RecipeArgument="ShowDocsAfterRunning"/>
+        </Action>
+      </Actions>
+
+    </Recipe>
+    <Recipe Name="CreateFoundationalModule">
+      <!-- This recipe will not appear in the Guidance Navigator because it is a recipe 
+           that is associated with a VS template and cannot be executed by itself -->
+      <Types>
+        <TypeAlias Name="Evaluator" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.ValueProviders.ExpressionEvaluatorValueProvider,GATLibrary" />
+        <TypeAlias Name="MessageBoxAction" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.MessageBoxAction, SmartClientDevelopment"/>
+      </Types>
+      <Caption>Add new Foundational Module...</Caption>
+      <HostData>
+        <CommandBar Menu="SCFSolution"/>
+        <CommandBar Menu="SCFSolutionFolder"/>
+      </HostData>
+      <Arguments>
+        <Argument Name="ItemName">
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.Templates.ValueProviders.ItemNameProvider,GATLibrary"/>
+        </Argument>
+        <Argument Name="ShellProjectGuid" Type="System.Guid">
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.GetGlobalValueProvider, SmartClientDevelopment" 
+						VariableName="ShellProjectGuid" />
+        </Argument>
+        <Argument Name="CommonProjectGuid" Type="System.Guid">
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.GetGlobalValueProvider, SmartClientDevelopment" 
+						VariableName="CommonProjectGuid" />
+        </Argument>
+        <Argument Name="ShellProject" Type="EnvDTE.Project, EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+          <ValueProvider
+						Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.GetProjectFromGuidProvider, SmartClientDevelopment"
+						FromArgument="ShellProjectGuid">
+            <MonitorArgument Name="ShellProjectGuid"/>
+          </ValueProvider>
+        </Argument>
+        <Argument Name="CommonProject" Type="EnvDTE.Project, EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+          <ValueProvider
+						Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.GetProjectFromGuidProvider, SmartClientDevelopment"
+						FromArgument="CommonProjectGuid">
+            <MonitorArgument Name="CommonProjectGuid"/>
+          </ValueProvider>
+        </Argument>
+        <Argument Name="ModuleProject" Type="EnvDTE.Project, EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.ValueProviders.FirstSelectedProject, GATLibrary" />
+        </Argument>
+        <Argument Name="RootNamespace">
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.GetGlobalValueProvider, SmartClientDevelopment"
+						VariableName="RootNamespace" />
+        </Argument>
+        <Argument Name="ModuleNamespace">
+          <ValueProvider Type="Evaluator" Expression="$(RootNamespace).$(ItemName)">
+            <MonitorArgument Name="ItemName"/>
+          </ValueProvider>
+        </Argument>
+        <Argument Name="SafeModuleName">
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.SafeNameValueProvider, SmartClientDevelopment" Input="ItemName">
+            <MonitorArgument Name="ItemName"/>
+          </ValueProvider>
+        </Argument>
+        <Argument Name="SectionName">
+          <ValueProvider Type="Evaluator" Expression="Services"/>
+        </Argument>
+        <Argument Name="CreateLayoutModule" Type="System.Boolean">
+          <ValueProvider Type="Evaluator" Expression="true"/>
+        </Argument>
+        <Argument Name="CreateModuleInterface" Type="System.Boolean">
+          <ValueProvider Type="Evaluator" Expression="true"/>
+        </Argument>
+        <Argument Name="InterfaceConstantsNamespace">
+          <ValueProvider Type="Evaluator" Expression="$(RootNamespace).Infrastructure" />
+        </Argument>
+        <Argument Name="ConstantsNamespace">
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.ConditionalValueProvider, SmartClientDevelopment"
+												 ConditionValueArgument="CreateModuleInterface"
+												 TrueValueArgument="ModuleNamespace"
+												 FalseValueArgument="InterfaceConstantsNamespace">
+            <MonitorArgument Name="CreateModuleInterface"/>
+          </ValueProvider>
+
+
+        </Argument>
+
+        <Argument Name="ShowDocsAfterRunning" Type="System.Boolean">
+          <ValueProvider Type="Evaluator" Expression="true" />
+        </Argument>
+      </Arguments>
+      <GatheringServiceData>
+        <Wizard xmlns="http://schemas.microsoft.com/pag/gax-wizards" SchemaVersion="1.0" Help="ms-help://MS.VSCC.v80/MS.VSIPCC.v80/ms.scsf.2006jun/SCSF/html/03-290-Automation%20Add%20Foundational%20Module.htm">
+          <Pages>
+            <Page>
+              <Title>Module namespace</Title>
+              <Fields>
+                <Field ValueName="ModuleNamespace" Label="Module namespace:" ReadOnly="true"/>
+                <Field ValueName="CreateLayoutModule" Label="This module provides a layout view."/>
+                <Field ValueName="CreateModuleInterface" Label="Create an interface library for this module."/>
+                <Field ValueName="ShowDocsAfterRunning" Label="Show related documentation after running the recipe" />
+              </Fields>
+            </Page>
+          </Pages>
+        </Wizard>
+      </GatheringServiceData>
+      <Actions>
+        <Action Name="UnfoldModuleProjects" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.UnfoldModuleProjectsAction, SmartClientDevelopment"
+						InterfaceTemplate="Projects\Module.Interface\Module.Interface.vstemplate"
+						BaseTemplate="Projects\Module\Module.Basic.vstemplate" 
+						LayoutTemplate="Projects\Module\Module.Layout.vstemplate">
+          <Input Name="CreateInterface" RecipeArgument="CreateModuleInterface"/>
+          <Input Name="CreateLayout" RecipeArgument="CreateLayoutModule"/>
+          <Input Name="ModuleProject" RecipeArgument="ModuleProject"/>
+          <Input Name="ShellProject" RecipeArgument="ShellProject"/>
+          <Input Name="InterfaceProject" RecipeArgument="CommonProject"/>
+        </Action>
+
+        <Action Name="GetProfileCatalog" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.Solution.Actions.GetProjectItemAction, GATLibrary"
+						ItemName="ProfileCatalog.xml">
+          <Input Name="Project" RecipeArgument="ShellProject"/>
+          <Output Name="ProjectItem"/>
+        </Action>
+        <Action Name="LoadXml" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.XML.Actions.LoadXmlAction, GATLibrary">
+          <Input Name="ProjectItem" ActionOutput="GetProfileCatalog.ProjectItem"/>
+          <Output Name="XmlDoc"/>
+        </Action>
+        <Action Name="AddSharedModule" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.AddSharedModuleAction, SmartClientDevelopment">
+          <Input Name="XmlDoc" ActionOutput="LoadXml.XmlDoc"/>
+          <Input Name="ModuleName" RecipeArgument="ItemName"/>
+          <Input Name="SectionName" RecipeArgument="SectionName"/>
+        </Action>
+        <Action Name="SaveXml" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.XML.Actions.SaveXmlAction, GATLibrary">
+          <Input Name="ProjectItem" ActionOutput="GetProfileCatalog.ProjectItem"/>
+          <Input Name="XmlDoc" ActionOutput="LoadXml.XmlDoc"/>
+        </Action>
+        <Action Name="ShowCreateSolutionHelp" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.ShowUrlAction, SmartClientDevelopment"
+						Url="ms-help://MS.VSCC.v80/MS.VSIPCC.v80/ms.scsf.2006jun/SCSF/html/03-290-Automation%20Add%20Foundational%20Module.htm">
+          <Input Name="ShowDocs" RecipeArgument="ShowDocsAfterRunning"/>
+        </Action>
+      </Actions>
+    </Recipe>
+    <Recipe Name="CreateBusinessModule">
+      <!-- This recipe will not appear in the Guidance Navigator because it is a recipe 
+           that is associated with a VS template and cannot be executed by itself -->
+      <Types>
+        <TypeAlias Name="Evaluator" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.ValueProviders.ExpressionEvaluatorValueProvider,GATLibrary" />
+        <TypeAlias Name="MessageBoxAction" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.MessageBoxAction, SmartClientDevelopment"/>
+      </Types>
+      <Caption>Create Business Module</Caption>
+      <HostData>
+        <CommandBar Menu="SCFSolution"/>
+        <CommandBar Menu="SCFSolutionFolder"/>
+      </HostData>
+      <Arguments>
+        <Argument Name="ItemName">
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.Templates.ValueProviders.ItemNameProvider,GATLibrary"/>
+        </Argument>
+        <Argument Name="ShellProjectGuid" Type="System.Guid">
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.GetGlobalValueProvider, SmartClientDevelopment" 
+						VariableName="ShellProjectGuid" />
+        </Argument>
+        <Argument Name="CommonProjectGuid" Type="System.Guid">
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.GetGlobalValueProvider, SmartClientDevelopment" 
+						VariableName="CommonProjectGuid" />
+        </Argument>
+        <Argument Name="ShellProject" Type="EnvDTE.Project, EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+          <ValueProvider
+						Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.GetProjectFromGuidProvider, SmartClientDevelopment"
+						FromArgument="ShellProjectGuid">
+            <MonitorArgument Name="ShellProjectGuid"/>
+          </ValueProvider>
+        </Argument>
+        <Argument Name="CommonProject" Type="EnvDTE.Project, EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+          <ValueProvider
+						Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.GetProjectFromGuidProvider, SmartClientDevelopment"
+						FromArgument="CommonProjectGuid">
+            <MonitorArgument Name="CommonProjectGuid"/>
+          </ValueProvider>
+        </Argument>
+        <Argument Name="ModuleProject" Type="EnvDTE.Project, EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.ValueProviders.FirstSelectedProject, GATLibrary" />
+        </Argument>
+        <Argument Name="RootNamespace">
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.GetGlobalValueProvider, SmartClientDevelopment"
+						VariableName="RootNamespace" />
+        </Argument>
+        <Argument Name="ModuleNamespace">
+          <ValueProvider Type="Evaluator" Expression="$(RootNamespace).$(ItemName)">
+            <MonitorArgument Name="ItemName"/>
+          </ValueProvider>
+        </Argument>
+        <Argument Name="SectionName">
+          <ValueProvider Type="Evaluator" Expression="Apps"/>
+        </Argument>
+        <Argument Name="CreateLayoutModule" Type="System.Boolean">
+          <ValueProvider Type="Evaluator" Expression="false"/>
+        </Argument>
+        <Argument Name="CreateModuleInterface" Type="System.Boolean">
+          <ValueProvider Type="Evaluator" Expression="true"/>
+        </Argument>
+        <Argument Name="InterfaceConstantsNamespace">
+          <ValueProvider Type="Evaluator" Expression="$(RootNamespace).Infrastructure" />
+        </Argument>
+        <Argument Name="ConstantsNamespace">
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.ConditionalValueProvider, SmartClientDevelopment"
+												 ConditionValueArgument="CreateModuleInterface"
+												 TrueValueArgument="ModuleNamespace"
+												 FalseValueArgument="InterfaceConstantsNamespace">
+            <MonitorArgument Name="CreateModuleInterface"/>
+          </ValueProvider>
+
+        </Argument>
+        <Argument Name="ShowDocsAfterRunning" Type="System.Boolean">
+          <ValueProvider Type="Evaluator" Expression="true" />
+        </Argument>
+      </Arguments>
+      <GatheringServiceData>
+        <Wizard xmlns="http://schemas.microsoft.com/pag/gax-wizards" SchemaVersion="1.0" Help="ms-help://MS.VSCC.v80/MS.VSIPCC.v80/ms.scsf.2006jun/SCSF/html/03-280-Automation%20Add%20Business%20Module.htm">
+          <Pages>
+            <Page>
+              <Title>Module namespace</Title>
+              <Fields>
+                <Field ValueName="ModuleNamespace" Label="Module namespace:" ReadOnly="true"/>
+                <Field ValueName="CreateModuleInterface" Label="Create an interface library for this module."/>
+                <Field ValueName="ShowDocsAfterRunning" Label="Show related documentation after running the recipe" />
+              </Fields>
+            </Page>
+          </Pages>
+        </Wizard>
+      </GatheringServiceData>
+      <Actions>
+
+        <Action Name="UnfoldModuleProjects" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.UnfoldModuleProjectsAction, SmartClientDevelopment"
+					InterfaceTemplate="Projects\Module.Interface\Module.Interface.vstemplate"
+					BaseTemplate="Projects\Module.Business\Module.vstemplate" 
+					LayoutTemplate="Projects\Module\Module.Layout.vstemplate">
+          <Input Name="CreateInterface" RecipeArgument="CreateModuleInterface"/>
+          <Input Name="CreateLayout" RecipeArgument="CreateLayoutModule"/>
+          <Input Name="ModuleProject" RecipeArgument="ModuleProject"/>
+          <Input Name="ShellProject" RecipeArgument="ShellProject"/>
+          <Input Name="InterfaceProject" RecipeArgument="CommonProject"/>
+          <Output Name="ModuleProject"/>
+          <Output Name="ModuleInterfaceProject"/>
+        </Action>
+
+        <Action Name="GetProfileCatalog" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.Solution.Actions.GetProjectItemAction, GATLibrary"
+							ItemName="ProfileCatalog.xml">
+          <Input Name="Project" RecipeArgument="ShellProject"/>
+          <Output Name="ProjectItem"/>
+        </Action>
+        <Action Name="LoadXml" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.XML.Actions.LoadXmlAction, GATLibrary">
+          <Input Name="ProjectItem" ActionOutput="GetProfileCatalog.ProjectItem"/>
+          <Output Name="XmlDoc"/>
+        </Action>
+        <Action Name="AddSharedModule" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.AddSharedModuleAction, SmartClientDevelopment">
+          <Input Name="XmlDoc" ActionOutput="LoadXml.XmlDoc"/>
+          <Input Name="ModuleName" RecipeArgument="ItemName"/>
+          <Input Name="SectionName" RecipeArgument="SectionName"/>
+        </Action>
+        <Action Name="SaveXml" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.XML.Actions.SaveXmlAction, GATLibrary">
+          <Input Name="ProjectItem" ActionOutput="GetProfileCatalog.ProjectItem"/>
+          <Input Name="XmlDoc" ActionOutput="LoadXml.XmlDoc"/>
+        </Action>
+
+        <Action Name="ShowCreateSolutionHelp" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.ShowUrlAction, SmartClientDevelopment"
+						Url="ms-help://MS.VSCC.v80/MS.VSIPCC.v80/ms.scsf.2006jun/SCSF/html/03-280-Automation%20Add%20Business%20Module.htm">
+          <Input Name="ShowDocs" RecipeArgument="ShowDocsAfterRunning"/>
+        </Action>
+      </Actions>
+    </Recipe>
+    <Recipe Name="CreateView" Bound="false">
+      <DocumentationLinks>
+        <Link Kind="Documentation" Caption="Creates a View with auxiliary classes, following the Model View Presenter pattern" Url="ms-help://MS.VSCC.v80/MS.VSIPCC.v80/ms.scsf.2006jun/SCSF/html/03-300-Adding%20a%20View.htm" />
+        <Link Kind="Documentation" Caption="Model View Presenter pattern" Url="ms-help://MS.VSCC.v80/MS.VSIPCC.v80/ms.scsf.2006jun/SCSF/html/03-030-Model%20View%20Presenter%20%20MVP%20.htm" />
+      </DocumentationLinks>
+      <Types>
+        <TypeAlias Name="Evaluator" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.ValueProviders.ExpressionEvaluatorValueProvider,GATLibrary" />
+        <TypeAlias Name="TextTemplateAction" Type="Microsoft.Practices.RecipeFramework.VisualStudio.Library.Templates.TextTemplateAction, Microsoft.Practices.RecipeFramework.VisualStudio.Library" />
+        <TypeAlias Name="AddItemFromStringAction" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.AddItemFromStringToProjectItemsAction, SmartClientDevelopment"/>
+      </Types>
+      <Caption>Add View (with presenter)...</Caption>
+      <Description>Adds a view and presenter that conforms to the Model-View-Presenter pattern.</Description>
+      <HostData>
+        <Icon ID="689" />
+        <CommandBar Menu="SCFProject" />
+        <CommandBar Menu="SCFProjectFolder" />
+      </HostData>
+      <Arguments>
+        <Argument Name="CurrentProject" Type="EnvDTE.Project, EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.ValueProviders.FirstSelectedProject, GATLibrary" />
+        </Argument>
+        <Argument Name="TargetProjectItemCollection" Type="EnvDTE.ProjectItems, EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+          <ValueProvider  Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.TargetItemsCollectionProvider, SmartClientDevelopment" />
+        </Argument>
+        <Argument Name="ViewName" Required="true">
+          <Converter Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Converters.TypeNameValidator, SmartClientDevelopment"/>
+        </Argument>
+        <Argument Name="ViewTargetFile">
+          <ValueProvider Type="Evaluator" Expression="$(ViewName).cs">
+            <MonitorArgument Name="ViewName" />
+          </ValueProvider>
+        </Argument>
+        <Argument Name="ViewDesignerTargetFile">
+          <ValueProvider Type="Evaluator" Expression="$(ViewName).Designer.cs">
+            <MonitorArgument Name="ViewName" />
+          </ValueProvider>
+        </Argument>
+        <Argument Name="ViewInterfaceTargetFile">
+          <ValueProvider Type="Evaluator" Expression="I$(ViewName).cs">
+            <MonitorArgument Name="ViewName" />
+          </ValueProvider>
+        </Argument>
+        <Argument Name="ViewPresenterTargetFile">
+          <ValueProvider Type="Evaluator" Expression="$(ViewName)Presenter.cs">
+            <MonitorArgument Name="ViewName" />
+          </ValueProvider>
+        </Argument>
+        <Argument Name="RootNamespace">
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.GetGlobalValueProvider, SmartClientDevelopment"
+						VariableName="RootNamespace" />
+        </Argument>
+        <Argument Name="TargetNamespace">
+          <Converter Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.Converters.NamespaceStringConverter, GATLibrary"/>
+          <ValueProvider Type="Evaluator" Expression="$(CurrentProject.Properties.Item('DefaultNamespace').Value)" />
+        </Argument>
+        <Argument Name="CreateViewFolder" Type="System.Boolean">
+          <ValueProvider Type="Evaluator" Expression="false" />
+        </Argument>
+        <Argument Name="ShowDocsAfterRunning" Type="System.Boolean">
+          <ValueProvider Type="Evaluator" Expression="true" />
+        </Argument>
+      </Arguments>
+      <GatheringServiceData>
+        <Wizard xmlns="http://schemas.microsoft.com/pag/gax-wizards" SchemaVersion="1.0" Help="ms-help://MS.VSCC.v80/MS.VSIPCC.v80/ms.scsf.2006jun/SCSF/html/03-310-Automation%20%20View%20%20with%20Presenter%20%20Recipe.htm">
+          <Pages>
+            <Page>
+              <Title>Adds a new view</Title>
+              <Fields>
+                <Field ValueName="ViewName" Label="View Name:"  InvalidValueMessage="Invalid name"/>
+                <Field ValueName="CreateViewFolder" Label="Create a folder for the view" />
+                <Field ValueName="ShowDocsAfterRunning" Label="Show related documentation after running the recipe" />
+              </Fields>
+            </Page>
+          </Pages>
+        </Wizard>
+      </GatheringServiceData>
+      <Actions>
+        <Action Name="AddReferenceToWinforms" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.AddReferenceIfMissingAction, SmartClientDevelopment"
+						ReferenceName="System.Windows.Forms" >
+          <Input Name="Project" RecipeArgument="CurrentProject"/>
+        </Action>
+        <Action Name="CreateFolder" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.CreateFolderAction, SmartClientDevelopment">
+          <Input Name="CreateFolder" RecipeArgument="CreateViewFolder"/>
+          <Input Name="FolderName" RecipeArgument="ViewName" />
+          <Input Name="TargetCollection" RecipeArgument="TargetProjectItemCollection" />
+          <Output Name="FolderCollection"/>
+        </Action>
+
+        <!-- Generate all files -->
+
+        <Action Name="GenerateView" Type="TextTemplateAction"
+						Template="Items\View\View.cs.t4">
+          <Input Name="ClassName" RecipeArgument="ViewName" />
+          <Input Name="TargetNamespace" RecipeArgument="TargetNamespace" />
+          <Input Name="RootNamespace" RecipeArgument="RootNamespace"/>
+          <Output Name="Content" />
+        </Action>
+        <Action Name="GenerateViewDesigner" Type="TextTemplateAction"
+					Template="Items\View\View.Designer.cs.t4">
+          <Input Name="ClassName" RecipeArgument="ViewName" />
+          <Input Name="TargetNamespace" RecipeArgument="TargetNamespace" />
+          <Input Name="RootNamespace" RecipeArgument="RootNamespace"/>
+          <Output Name="Content" />
+        </Action>
+        <Action Name="GenerateViewInterface" Type="TextTemplateAction"
+					Template="Items\View\IView.cs.t4">
+          <Input Name="ClassName" RecipeArgument="ViewName" />
+          <Input Name="TargetNamespace" RecipeArgument="TargetNamespace" />
+          <Input Name="RootNamespace" RecipeArgument="RootNamespace"/>
+          <Output Name="Content" />
+        </Action>
+        <Action Name="GenerateViewPresenter" Type="TextTemplateAction"
+					Template="Items\View\Presenter.cs.t4">
+          <Input Name="ClassName" RecipeArgument="ViewName" />
+          <Input Name="TargetNamespace" RecipeArgument="TargetNamespace" />
+          <Input Name="RootNamespace" RecipeArgument="RootNamespace"/>
+          <Output Name="Content" />
+        </Action>
+
+        <!-- Add project items -->
+
+        <Action Name="AddView" Type="AddItemFromStringAction" Open="false">
+          <Input Name="Content" ActionOutput="GenerateView.Content" />
+          <Input Name="TargetFileName" RecipeArgument="ViewTargetFile" />
+          <Input Name="TargetCollection"  ActionOutput="CreateFolder.FolderCollection" />
+          <Output Name="CreatedProjectItems" />
+        </Action>
+        <Action Name="AddViewDesigner" Type="AddItemFromStringAction" Open="false">
+          <Input Name="Content" ActionOutput="GenerateViewDesigner.Content" />
+          <Input Name="TargetFileName" RecipeArgument="ViewDesignerTargetFile" />
+          <Input Name="TargetCollection" ActionOutput="AddView.CreatedProjectItems" />
+        </Action>
+        <Action Name="AddViewInterface" Type="AddItemFromStringAction" Open="false">
+          <Input Name="Content" ActionOutput="GenerateViewInterface.Content" />
+          <Input Name="TargetFileName" RecipeArgument="ViewInterfaceTargetFile" />
+          <Input Name="TargetCollection" ActionOutput="CreateFolder.FolderCollection" />
+        </Action>
+        <Action Name="AddViewPresenter" Type="AddItemFromStringAction" Open="false">
+          <Input Name="Content" ActionOutput="GenerateViewPresenter.Content" />
+          <Input Name="TargetFileName" RecipeArgument="ViewPresenterTargetFile" />
+          <Input Name="TargetCollection" ActionOutput="CreateFolder.FolderCollection" />
+        </Action>
+        <!-- If you don't want the docs to appear after the recipe runs, just remove this action  -->
+        <Action Name="ShowCreateSolutionHelp" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.ShowUrlAction, SmartClientDevelopment"
+          Url="ms-help://MS.VSCC.v80/MS.VSIPCC.v80/ms.scsf.2006jun/SCSF/html/03-310-Automation%20%20View%20%20with%20Presenter%20%20Recipe.htm">
+          <Input Name="ShowDocs" RecipeArgument="ShowDocsAfterRunning"/>
+        </Action>
+      </Actions>
+    </Recipe>
+    <Recipe Name="AddEventSubscription" Bound="false">
+      <DocumentationLinks>
+        <Link Kind="Documentation" Caption="Adds an event subscriber" Url="ms-help://MS.VSCC.v80/MS.VSIPCC.v80/ms.scsf.2006jun/SCSF/html/03-410-Publishing%20Events%20and%20Subscribing%20to%20Events.htm" />
+      </DocumentationLinks>
+      <Types>
+        <TypeAlias Name="Evaluator" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.ValueProviders.ExpressionEvaluatorValueProvider,GATLibrary" />
+        <TypeAlias Name="EvaluatorAction" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.Actions.EvaluateExpressionAction, GATLibrary"/>
+        <TypeAlias Name="MessageBoxActionType" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.MessageBoxAction, SmartClientDevelopment" />
+      </Types>
+      <Caption>Add Event Subscription...</Caption>
+      <Description>Adds a subscription to an event through CAB's Event Broker.</Description>
+      <HostData>
+        <CommandBar Menu="SCFItem" />
+        <CommandBar Menu="SCF1075"/>
+      </HostData>
+      <Arguments>
+        <Argument Name="CurrentProject" Type="EnvDTE.Project, EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.ValueProviders.FirstSelectedProject, GATLibrary" />
+        </Argument>
+        <Argument Name="CurrentProjectConstantsNamespace">
+          <ValueProvider Type="Evaluator" Expression="$(CurrentProject.Properties.Item('DefaultNamespace').Value).Constants" />
+        </Argument>
+        <Argument Name="CurrentClass" Type="EnvDTE.CodeClass, EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" >
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.CodeModel.ValueProviders.CurrentClassProvider, GATLibrary">
+          </ValueProvider>
+        </Argument>
+        <Argument Name="CommonProjectGuid" Type="System.Guid">
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.GetGlobalValueProvider, SmartClientDevelopment" 
+							VariableName="CommonProjectGuid" />
+        </Argument>
+        <Argument Name="CommonProject" Type="EnvDTE.Project, EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" >
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.GetProjectFromGuidProvider, SmartClientDevelopment" 
+							FromArgument="CommonProjectGuid">
+            <MonitorArgument Name="CommonProjectGuid" />
+          </ValueProvider>
+        </Argument>
+        <Argument Name="CommonProjectConstantsNamespace">
+          <ValueProvider Type="Evaluator" Expression="$(CommonProject.Properties.Item('DefaultNamespace').Value).Constants" />
+        </Argument>
+				<Argument Name="CommonEventTopicNamesCodeClass" Type="EnvDTE.CodeClass, EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" >
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.ProjectCodeClassFromTypeNameProvider, SmartClientDevelopment"
+							TypeName="Constants.EventTopicNames" Project="CommonProject">
+            <MonitorArgument Name="CommonProject" />
+          </ValueProvider>
+        </Argument>
+        <Argument Name="EventTopic" Type="System.String" Required="true" >
+          <Converter Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Converters.EventTopicSubscriptionValidator, SmartClientDevelopment"
+						CodeClass="EventTopicNamesCodeClass" CommonCodeClass="CommonEventTopicNamesCodeClass"/>
+        </Argument>
+        <Argument Name="ThreadOption" Type="Microsoft.Practices.CompositeUI.EventBroker.ThreadOption, Microsoft.Practices.CompositeUI">
+          <ValueProvider Type="Evaluator" Expression="UserInterface" />
+        </Argument>
+        <Argument Name="EventArgs" Type="EnvDTE.CodeClass, EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+          <Converter Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.CodeModel.Converters.CodeModelConverter, GATLibrary"/>
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.CodeModel.ValueProviders.CodeClassProvider, GATLibrary"
+						ClassName="System.EventArgs"
+						Filter="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.CodeModel.Editors.Filters.InheritsFrom, GATLibrary"
+						InheritsFrom="System.EventArgs"/>
+        </Argument>
+      </Arguments>
+      <GatheringServiceData>
+        <Wizard xmlns="http://schemas.microsoft.com/pag/gax-wizards" SchemaVersion="1.0" Help="ms-help://MS.VSCC.v80/MS.VSIPCC.v80/ms.scsf.2006jun/SCSF/html/03-430-Automation%20%20Add%20Event%20Subscription%20Recipe.htm">
+          <Pages>
+            <Page>
+              <Title>Add Event Subscription...</Title>
+              <Fields>
+                <Field ValueName="EventTopic" Label="Event topic name:" ReadOnly="true"
+									InvalidValueMessage="An existing member is preventing the method handler creation." />
+                <Field ValueName="ThreadOption" Label="Threading option:"/>
+                <Field ValueName="EventArgs" Label="Event argument type:">
+                  <Editor 
+										Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.CodeModel.Editors.CodeModelEditor, GATLibrary" 
+										BrowseRoot="SelectedProjects"
+										BrowseKind="Class"
+										Filter="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.CodeModel.Editors.Filters.InheritsFrom, GATLibrary"
+										InheritsFrom="System.EventArgs"/>
+                </Field>
+              </Fields>
+            </Page>
+          </Pages>
+        </Wizard>
+      </GatheringServiceData>
+      <Actions>
+        <!--Calculate needed values-->
+        <Action Name="CalculateHandlerMethodName" Type="EvaluatorAction"
+						Expression="On$(EventTopic)">
+          <Input RecipeArgument="EventTopic" Name="EventTopic"/>
+          <Output Name="ReturnValue"/>
+        </Action>
+        <Action Name="CalculateAttributeValue" Type="EvaluatorAction"
+						Expression="EventTopicNames.$(EventTopic), ThreadOption.$(ThreadOption)">
+          <Input RecipeArgument="EventTopic" Name="EventTopic"/>
+          <Input RecipeArgument="ThreadOption" Name="ThreadOption"/>
+          <Output Name="ReturnValue"/>
+        </Action>
+        <Action Name="CalculateEventArgsName" Type="EvaluatorAction"
+						Expression="$(EventArgs.FullName)">
+          <Input RecipeArgument="EventArgs" Name="EventArgs"/>
+          <Output Name="ReturnValue"/>
+        </Action>
+
+        <!--Add the event handler method-->
+        <Action Name="AddEventHandler" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.CodeModel.Actions.AddMethodAction,GATLibrary"
+						Position="-1">
+          <Input Name="Class" RecipeArgument="CurrentClass"/>
+          <Input Name="MethodName" ActionOutput="CalculateHandlerMethodName.ReturnValue"/>
+          <Output Name="Method"/>
+        </Action>
+        <Action Name="AddEventArgsParameter" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.CodeModel.Actions.AddParameterAction,GATLibrary"
+					ParameterName="eventArgs">
+          <Input Name="ParameterType" ActionOutput="CalculateEventArgsName.ReturnValue"/>
+          <Input Name="Method" ActionOutput="AddEventHandler.Method"/>
+        </Action>
+        <Action Name="AddSenderParameter" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.CodeModel.Actions.AddParameterAction,GATLibrary"
+						ParameterName="sender"
+						ParameterType="System.Object">
+          <Input Name="Method" ActionOutput="AddEventHandler.Method"/>
+        </Action>
+        <Action Name="AddSubscriberAttribute" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.AddAttributeAction, SmartClientDevelopment"
+						AttributeName="EventSubscription">
+          <Input Name="CodeElement" ActionOutput="AddEventHandler.Method"/>
+          <Input Name="AttributeValue" ActionOutput="CalculateAttributeValue.ReturnValue"/>
+        </Action>
+
+        <!--Add needed usings-->
+        <Action Name="AddUsingForEventBroker" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.AddMissingUsingAction, SmartClientDevelopment" 
+					UsingNamespace="Microsoft.Practices.CompositeUI.EventBroker">
+          <Input Name="Target" RecipeArgument="CurrentClass"/>
+        </Action>
+				<Action Name="AddUsingForConstants" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.AddUsingForEventTopicNames, SmartClientDevelopment" >
+					<Input Name="LocalUsingNamespace" RecipeArgument="CurrentProjectConstantsNamespace" />
+					<Input Name="GlobalUsingNamespace" RecipeArgument="CommonProjectConstantsNamespace" />
+					<Input Name="Target" RecipeArgument="CurrentClass"/>
+				</Action>				
+
+        <Action Name="AddCommonProjectRef" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.Solution.Actions.AddProjectReferenceAction, GATLibrary">
+          <Input Name="ReferringProject" RecipeArgument="CurrentProject"/>
+          <Input Name="ReferencedProject" RecipeArgument="CommonProject"/>
+        </Action>
+        <Action Name="AddCABReference" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.Solution.Actions.AddReferenceAction, GATLibrary"
+						ReferenceName="Microsoft.Practices.CompositeUI.dll">
+          <Input Name="ReferringProject" RecipeArgument="CurrentProject"/>
+        </Action>
+
+      </Actions>
+    </Recipe>
+    <Recipe Name="AddEventPublication" Bound="false">
+      <DocumentationLinks>
+        <Link Kind="Documentation" Caption="Adds an event publisher" Url="ms-help://MS.VSCC.v80/MS.VSIPCC.v80/ms.scsf.2006jun/SCSF/html/03-410-Publishing%20Events%20and%20Subscribing%20to%20Events.htm" />
+      </DocumentationLinks>
+      <Types>
+        <TypeAlias Name="Evaluator" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.ValueProviders.ExpressionEvaluatorValueProvider,GATLibrary" />
+        <TypeAlias Name="EvaluatorAction" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.Actions.EvaluateExpressionAction, GATLibrary"/>
+        <TypeAlias Name="MessageBoxAction" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.MessageBoxAction, SmartClientDevelopment"/>
+      </Types>
+      <Caption>Add Event Publication...</Caption>
+      <Description>Adds a publication of an event through CAB's Event Broker.</Description>
+      <HostData>
+        <CommandBar Menu="SCFItem" />
+        <CommandBar Menu="SCF1075"/>
+      </HostData>
+      <Arguments>
+        <Argument Name="CurrentProject" Type="EnvDTE.Project, EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.ValueProviders.FirstSelectedProject, GATLibrary" />
+        </Argument>
+        <Argument Name="CurrentClass" Type="EnvDTE.CodeClass, EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" >
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.CodeModel.ValueProviders.CurrentClassProvider, GATLibrary" />
+        </Argument>
+        <Argument Name="CommonProjectGuid" Type="System.Guid">
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.GetGlobalValueProvider, SmartClientDevelopment" 
+							VariableName="CommonProjectGuid" />
+        </Argument>
+        <Argument Name="CommonProject" Type="EnvDTE.Project, EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" >
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.GetProjectFromGuidProvider, SmartClientDevelopment" 
+							FromArgument="CommonProjectGuid">
+            <MonitorArgument Name="CommonProjectGuid" />
+          </ValueProvider>
+        </Argument>
+
+        <Argument Name="TargetProject" Type="EnvDTE.Project, EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" >
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.SelectTargetProjectProvider, SmartClientDevelopment">
+            <MonitorArgument Name="CurrentProject"/>
+            <MonitorArgument Name="CommonProject"/>
+            <MonitorArgument Name="PublicationScope"/>
+          </ValueProvider>
+        </Argument>
+        <Argument Name="CommonProjectConstantsNamespace">
+          <ValueProvider Type="Evaluator" Expression="$(CommonProject.Properties.Item('DefaultNamespace').Value).Constants" />
+        </Argument>
+				<Argument Name="CurrentProjectConstantsNamespace">
+					<ValueProvider Type="Evaluator" Expression="$(CurrentProject.Properties.Item('DefaultNamespace').Value).Constants" />
+				</Argument>
+				<Argument Name="EventTopicNamesCodeClass" Type="EnvDTE.CodeClass, EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" >
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.ProjectCodeClassFromTypeNameProvider, SmartClientDevelopment"
+							TypeName="Constants.EventTopicNames" Project="CommonProject" >
+            <MonitorArgument Name="CommonProject" />
+          </ValueProvider>
+        </Argument>
+        <Argument Name="EventTopic" Type="System.String" Required="true" >
+          <Converter Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Converters.EventTopicPublicationValidator, SmartClientDevelopment"/>
+        </Argument>
+        <Argument Name="PublicationScope" Type="Microsoft.Practices.CompositeUI.EventBroker.PublicationScope, Microsoft.Practices.CompositeUI">
+          <ValueProvider Type="Evaluator" Expression="Global" />
+        </Argument>
+        <Argument Name="EventArgs" Type="EnvDTE.CodeClass, EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+          <Converter Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.CodeModel.Converters.CodeModelConverter, GATLibrary"/>
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.CodeModel.ValueProviders.CodeClassProvider, GATLibrary"
+						ClassName="System.EventArgs"
+						Filter="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.CodeModel.Editors.Filters.InheritsFrom, GATLibrary"
+						InheritsFrom="System.EventArgs"/>
+        </Argument>
+      </Arguments>
+      <GatheringServiceData>
+        <Wizard xmlns="http://schemas.microsoft.com/pag/gax-wizards" SchemaVersion="1.0" Help="ms-help://MS.VSCC.v80/MS.VSIPCC.v80/ms.scsf.2006jun/SCSF/html/03-420-Automation%20%20Add%20Event%20Publication%20Recipe.htm">
+          <Pages>
+            <Page>
+              <Title>Add Event Publication</Title>
+              <Fields>
+                <Field ValueName="EventTopic" Label="Event topic name:" 
+									InvalidValueMessage="An existing member is preventing the event creation."/>
+                <Field ValueName="PublicationScope" Label="Publication scope:"/>
+                <Field ValueName="EventArgs" Label="Event argument type:">
+                  <Editor 
+										Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.CodeModel.Editors.CodeModelEditor, GATLibrary" 
+										BrowseRoot="SelectedProjects"
+										BrowseKind="Class"
+										Filter="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.CodeModel.Editors.Filters.InheritsFrom, GATLibrary"
+										InheritsFrom="System.EventArgs"/>
+                </Field>
+              </Fields>
+            </Page>
+          </Pages>
+        </Wizard>
+      </GatheringServiceData>
+      <Actions>
+        <!--Calculate needed values-->
+        <Action Name="CalculateEventArgsName" Type="EvaluatorAction"
+						Expression="$(EventArgs.FullName)">
+          <Input RecipeArgument="EventArgs" Name="EventArgs"/>
+          <Output Name="ReturnValue"/>
+        </Action>
+        <Action Name="CalculateDelegateName" Type="EvaluatorAction"
+						Expression="System.EventHandler&lt;$(EventArgs.FullName)&gt;">
+          <Input RecipeArgument="EventArgs" Name="EventArgs"/>
+          <Output Name="ReturnValue"/>
+        </Action>
+        <Action Name="CalculateAttributeValue" Type="EvaluatorAction"
+						Expression="EventTopicNames.$(EventTopic), PublicationScope.$(PublicationScope)">
+          <Input RecipeArgument="EventTopic" Name="EventTopic"/>
+          <Input RecipeArgument="PublicationScope" Name="PublicationScope"/>
+          <Output Name="ReturnValue"/>
+        </Action>
+        <Action Name="CalculateFireMethodName" Type="EvaluatorAction"
+						Expression="On$(EventTopic)">
+          <Input RecipeArgument="EventTopic" Name="EventTopic"/>
+          <Output Name="ReturnValue"/>
+        </Action>
+
+        <!--Create the event-->
+        <Action Name="AddEvent" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.CodeModel.Actions.AddEventAction, GATLibrary"
+						Access="1" CreatePropertyStyle="false">
+          <Input Name="CodeClass" RecipeArgument="CurrentClass"/>
+          <Input Name="EventName" RecipeArgument="EventTopic"/>
+          <Input Name="DelegateName" ActionOutput="CalculateDelegateName.ReturnValue"/>
+          <Output Name="Event"/>
+        </Action>
+        <Action Name="AddPublicationAttribute" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.AddAttributeAction, SmartClientDevelopment"
+						AttributeName="EventPublication">
+          <Input Name="CodeElement" ActionOutput="AddEvent.Event"/>
+          <Input Name="AttributeValue" ActionOutput="CalculateAttributeValue.ReturnValue"/>
+        </Action>
+
+        <!--Create the fire method-->
+        <Action Name="AddFireMethod" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.CodeModel.Actions.AddMethodAction,GATLibrary"
+						Access="8" Position="-1">
+          <Input Name="Class" RecipeArgument="CurrentClass"/>
+          <Input Name="MethodName" ActionOutput="CalculateFireMethodName.ReturnValue"/>
+          <Output Name="Method"/>
+        </Action>
+        <Action Name="SetMethodAsVirtual" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.UpdateEventFireMethodAction, SmartClientDevelopment">
+          <Input Name="Method" ActionOutput="AddFireMethod.Method"/>
+          <Input Name="EventTopic" RecipeArgument="EventTopic"/>
+        </Action>
+        <Action Name="AddEventArgsParameter" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.CodeModel.Actions.AddParameterAction,GATLibrary"
+					ParameterName="eventArgs">
+          <Input Name="ParameterType" ActionOutput="CalculateEventArgsName.ReturnValue"/>
+          <Input Name="Method" ActionOutput="AddFireMethod.Method"/>
+        </Action>
+
+        <!--Add missing using statemets-->
+        <Action Name="AddUsingForEventBroker" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.AddMissingUsingAction, SmartClientDevelopment" 
+					UsingNamespace="Microsoft.Practices.CompositeUI.EventBroker">
+          <Input Name="Target" RecipeArgument="CurrentClass"/>
+        </Action>
+				<Action Name="AddUsingForConstants" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.AddUsingForEventTopicNames, SmartClientDevelopment" >
+					<Input Name="LocalUsingNamespace" RecipeArgument="CurrentProjectConstantsNamespace" />
+					<Input Name="GlobalUsingNamespace" RecipeArgument="CommonProjectConstantsNamespace" />
+					<Input Name="Target" RecipeArgument="CurrentClass"/>
+        </Action>
+
+        <!--Add the event constant-->
+        <Action Name="AddEventTopicToConstants" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.AddFieldAction, SmartClientDevelopment"
+						FieldType="string" Access="1" Position="-1">
+          <Input Name="CodeClass" RecipeArgument="EventTopicNamesCodeClass"/>
+          <Input Name="FieldName" RecipeArgument="EventTopic"/>
+          <Input Name="FieldValue" RecipeArgument="EventTopic"/>
+        </Action>
+
+        <Action Name="AddCommonProjectRef" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.Solution.Actions.AddProjectReferenceAction, GATLibrary">
+          <Input Name="ReferringProject" RecipeArgument="CurrentProject"/>
+          <Input Name="ReferencedProject" RecipeArgument="CommonProject"/>
+        </Action>
+        <Action Name="AddCABReference" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.Solution.Actions.AddReferenceAction, GATLibrary"
+						ReferenceName="Microsoft.Practices.CompositeUI.dll">
+          <Input Name="ReferringProject" RecipeArgument="CurrentProject"/>
+        </Action>
+
+      </Actions>
+    </Recipe>
+    <Recipe Name="AddAsyncWebServiceProxy" Bound="false">
+      <DocumentationLinks>
+        <Link Kind="Documentation" Caption="Creates code for calling Web Services asynchronously" Url="ms-help://MS.VSCC.v80/MS.VSIPCC.v80/ms.scsf.2006jun/SCSF/html/03-330-Creating%20a%20Smart%20Web%20Reference.htm" />
+        <Link Kind="Documentation" Caption="Service Agent Proxy pattern" Url="ms-help://MS.VSCC.v80/MS.VSIPCC.v80/ms.scsf.2006jun/SCSF/html/03-050-Service%20Agent%20Proxy%20API%20Separation.htm" />
+        <Link Kind="Documentation" Caption="Asynchronous Web Service Invocation with Timeout pattern" Url="ms-help://MS.VSCC.v80/MS.VSIPCC.v80/ms.scsf.2006jun/SCSF/html/03-040-Asynchronous%20Web%20Service%20Invocation%20with%20Timeout.htm" />
+      </DocumentationLinks>
+      <Types>
+        <TypeAlias Name="Evaluator" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.ValueProviders.ExpressionEvaluatorValueProvider,GATLibrary" />
+      </Types>
+      <Caption>Add Smart W&amp;eb Reference...</Caption>
+      <Description>Adds a web reference, with an async web reference proxy class that supports timeout and callbacks.</Description>
+      <HostData Priority="768">
+        <!-- Web Reference|Add menu -->
+        <!--<CommandBar Menu="SCF1106" />-->
+        <CommandBar Menu="SCFProject" />
+      </HostData>
+      <Arguments>
+        <Argument Name="CurrentProject" Type="EnvDTE.Project, EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.ValueProviders.FirstSelectedProject, GATLibrary" />
+        </Argument>
+        <Argument Name="CommonProjectGuid" Type="System.Guid">
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.GetGlobalValueProvider, SmartClientDevelopment" 
+							VariableName="CommonProjectGuid" />
+        </Argument>
+        <Argument Name="CommonProject" Type="EnvDTE.Project, EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" >
+          <ValueProvider Type="Microsoft.Practices.GuidanceAutomation.SmartClient.ValueProviders.GetProjectFromGuidProvider, SmartClientDevelopment" 
+							FromArgument="CommonProjectGuid">
+            <MonitorArgument Name="CommonProjectGuid" />
+          </ValueProvider>
+        </Argument>
+        <Argument Name="ShowDocsAfterRunning" Type="System.Boolean">
+          <ValueProvider Type="Evaluator" Expression="true" />
+        </Argument>
+      </Arguments>
+      <Actions>
+        <Action Name="AddAsyncWebServiceProxyAction" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.AddAsyncWebServiceProxyAction,SmartClientDevelopment"/>
+        <Action Name="AddCommonProjectRef" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Library.Solution.Actions.AddProjectReferenceAction, GATLibrary">
+          <Input Name="ReferringProject" RecipeArgument="CurrentProject"/>
+          <Input Name="ReferencedProject" RecipeArgument="CommonProject"/>
+        </Action>
+        <Action Name="ShowCreateSolutionHelp" Type="Microsoft.Practices.GuidanceAutomation.SmartClient.Actions.ShowUrlAction, SmartClientDevelopment"
+  Url="ms-help://MS.VSCC.v80/MS.VSIPCC.v80/ms.scsf.2006jun/SCSF/html/03-340-Automation%20%20Add%20Smart%20Web%20Reference%20Recipe.htm">
+          <Input Name="ShowDocs" RecipeArgument="ShowDocsAfterRunning"/>
+        </Action>
+      </Actions>
+    </Recipe>
+  </Recipes>
+</GuidancePackage>

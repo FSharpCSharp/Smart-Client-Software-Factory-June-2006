@@ -1,0 +1,173 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E754B7DA-2C3C-408B-A7B5-AC94D37C5B1A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Microsoft.Practices.GuidanceAutomation.SmartClient.Library</RootNamespace>
+    <AssemblyName>GATLibrary</AssemblyName>
+    <WarningLevel>4</WarningLevel>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\..\IPG.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyMode>File</AssemblyOriginatorKeyMode>
+    <DelaySign>true</DelaySign>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <NoWarn>0618 1701</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Debug\PublicAssemblies\Microsoft.Practices.RecipeFramework.Library.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <NoWarn>0618 1701</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <DocumentationFile>bin\Release\PublicAssemblies\Microsoft.Practices.RecipeFramework.Library.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CustomMarshalers" />
+    <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="EnvDTE80, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Practices.Common, Version=1.0.51206.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ComponentModel, Version=1.0.51206.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.RecipeFramework, Version=1.0.51206.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.RecipeFramework.Common, Version=1.0.51206.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.RecipeFramework.VisualStudio, Version=1.0.51206.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.RecipeFramework.VisualStudio.Common, Version=1.0.51206.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.RecipeFramework.VisualStudio.Library, Version=1.0.51206.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.WizardFramework, Version=1.0.51206.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.OLE.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\WINDOWS\assembly\GAC\Microsoft.VisualStudio.OLE.Interop\7.1.40304.0__b03f5f7f11d50a3a\Microsoft.VisualStudio.OLE.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\WINDOWS\assembly\GAC\Microsoft.VisualStudio.Shell.Interop\7.1.40304.0__b03f5f7f11d50a3a\Microsoft.VisualStudio.Shell.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TextManager.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.TextTemplating, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\Microsoft.VisualStudio.TextTemplating.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="VSLangProj, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="VsWebSite.Interop, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Actions\AddItemFromStringAction.cs" />
+    <Compile Include="Actions\CreateUnboundReferenceAction.cs" />
+    <Compile Include="Actions\DynamicInputAction.cs" />
+    <Compile Include="Actions\EvaluateExpressionAction.cs" />
+    <Compile Include="Actions\GetProjectAction.cs" />
+    <Compile Include="Actions\GetProjectItemContentAction.cs" />
+    <Compile Include="Actions\SetProjectItemContentAction.cs" />
+    <Compile Include="CodeModel\Actions\AddAttributeAction.cs" />
+    <Compile Include="CodeModel\Actions\AddEventAction.cs" />
+    <Compile Include="CodeModel\Actions\AddFieldAction.cs" />
+    <Compile Include="CodeModel\Actions\AddMethodAction.cs" />
+    <Compile Include="CodeModel\Actions\AddParameterAction.cs" />
+    <Compile Include="CodeModel\CodeElementEx.cs" />
+    <Compile Include="CodeModel\CodeModelUtil.cs" />
+    <Compile Include="CodeModel\Converters\CodeModelConverter.cs" />
+    <Compile Include="CodeModel\Editors\CodeModelEditor.cs" />
+    <Compile Include="CodeModel\Editors\CodeModelEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CodeModel\Editors\Filters\ContainsAttribute.cs" />
+    <Compile Include="CodeModel\Editors\Filters\Implements.cs" />
+    <Compile Include="CodeModel\Editors\Filters\InheritsFrom.cs" />
+    <Compile Include="CodeModel\Editors\ICodeModelEditorFilter.cs" />
+    <Compile Include="CodeModel\ValueProviders\CodeClassProvider.cs" />
+    <Compile Include="CodeModel\ValueProviders\CurrentClassProvider.cs" />
+    <Compile Include="Converters\CodeIdentifierStringConverter.cs" />
+    <Compile Include="Converters\DteElementConverter.cs" />
+    <Compile Include="Converters\NamespaceStringConverter.cs" />
+    <Compile Include="DispatchObject.cs" />
+    <Compile Include="DteHelper.cs" />
+    <Compile Include="ExpressionEvaluationService.cs" />
+    <Compile Include="Guard.cs" />
+    <Compile Include="NativeMethods.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CodeModel\Editors\CodeModelEditorForm.resx">
+      <DependentUpon>CodeModelEditorForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Solution\Actions\AddProjectReferenceAction.cs" />
+    <Compile Include="Solution\Actions\AddReferenceAction.cs" />
+    <Compile Include="Solution\Actions\CreateFolderAction.cs" />
+    <Compile Include="Solution\Actions\GetProjectItemAction.cs" />
+    <Compile Include="Solution\ReferenceUtil.cs" />
+    <Compile Include="Solution\ValueProviders\ProjectByNameProvider.cs" />
+    <Compile Include="Templates\ValueProviders\ItemNameProvider.cs" />
+    <Compile Include="ValueProviders\FirstSelectedProject.cs" />
+    <Compile Include="ValueProviders\ExpressionEvaluatorValueProvider.cs" />
+    <Compile Include="VisualStudio\References\FolderReference.cs" />
+    <Compile Include="XML\Actions\LoadXmlAction.cs" />
+    <Compile Include="XML\Actions\SaveXmlAction.cs" />
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

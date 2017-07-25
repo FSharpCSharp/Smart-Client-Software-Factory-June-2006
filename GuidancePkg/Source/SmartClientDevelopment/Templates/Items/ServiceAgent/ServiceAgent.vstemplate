@@ -1,0 +1,30 @@
+<VSTemplate Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+	<TemplateData>
+		<Name>Add Service Agent</Name>
+		<Description>Creates a Service Agent for a server proxy</Description>
+		<ProjectType>CSharp</ProjectType>
+		<ProjectSubType>
+		</ProjectSubType>
+		<SortOrder>1000</SortOrder>
+		<CreateNewFolder>true</CreateNewFolder>
+		<DefaultName>ServiceAgent.cs</DefaultName>
+		<ProvideDefaultName>true</ProvideDefaultName>
+		<LocationField>Enabled</LocationField>
+		<EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+		<Icon>__TemplateIcon.ico</Icon>
+	</TemplateData>
+	<TemplateContent>
+		<ProjectItem ReplaceParameters="true" SubType="ServiceAgent">ServiceAgent.t4</ProjectItem>
+		<ProjectItem ReplaceParameters="true">ServiceAgent.Designer.t4</ProjectItem>
+		<ProjectItem ReplaceParameters="true" TargetFileName="$InterfaceName$.cs">IServiceAgent.t4</ProjectItem>
+	</TemplateContent>
+	<WizardExtension>
+		<Assembly>Microsoft.Practices.RecipeFramework.VisualStudio, Version=1.0.51206.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Assembly>
+		<FullClassName>Microsoft.Practices.RecipeFramework.VisualStudio.Templates.UnfoldTemplate</FullClassName>
+	</WizardExtension>
+	<WizardData>
+		<Template xmlns="http://schemas.microsoft.com/pag/gax-template"
+			SchemaVersion="1.0" Recipe="CreateServiceAgentWrapper">
+		</Template>
+	</WizardData>
+</VSTemplate>

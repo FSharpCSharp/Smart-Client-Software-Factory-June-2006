@@ -1,0 +1,722 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0BDECA2A-B27F-444E-BF98-FB3FCA3FBD1A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Microsoft.Practices.GuidanceAutomation.SmartClient</RootNamespace>
+    <AssemblyName>SmartClientDevelopment</AssemblyName>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1668</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1668</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.Common, Version=1.0.51206.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ComponentModel, Version=1.0.51206.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.CompositeUI, Version=1.0.51205.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)Lib\Microsoft.Practices.CompositeUI.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ObjectBuilder, Version=1.0.51205.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)Lib\Microsoft.Practices.ObjectBuilder.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Microsoft.Practices.RecipeFramework, Version=1.0.51206.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.RecipeFramework.Common, Version=1.0.51206.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.RecipeFramework.VisualStudio, Version=1.0.51206.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.RecipeFramework.VisualStudio.Library, Version=1.0.51206.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.WizardFramework, Version=1.0.51206.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\WINDOWS\gac\GAC_MSIL\Microsoft.VisualStudio.Shell\2.0.0.0__b03f5f7f11d50a3a\Microsoft.VisualStudio.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.TextTemplating, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="Microsoft.WizardFramework, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>$(DevEnvDir)Microsoft.WizardFramework.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EnvDTE80, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VSLangProj, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VSLangProj80, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Actions\AddAsyncWebServiceProxyAction.cs" />
+    <Compile Include="Actions\AddAttributeAction.cs" />
+    <Compile Include="Actions\AddFieldAction.cs" />
+    <Compile Include="Actions\AddItemFromStringToProjectItemsAction.cs" />
+    <Compile Include="Actions\AddMissingUsingAction.cs" />
+    <Compile Include="Actions\AddReferenceIfMissingAction.cs" />
+    <Compile Include="Actions\AddSharedModuleAction.cs" />
+    <Compile Include="Actions\AddUsingForEventTopicNames.cs" />
+    <Compile Include="Actions\CreateFolderAction.cs" />
+    <Compile Include="Actions\CreateShellProjectAction.cs" />
+    <Compile Include="Actions\CreateSolutionDirectoryAction.cs" />
+    <Compile Include="Actions\FileCopyAction.cs" />
+    <Compile Include="Actions\GetProjectGuid.cs" />
+    <Compile Include="Actions\InitializeFieldAction.cs" />
+    <Compile Include="Actions\MessageBoxAction.cs" />
+    <Compile Include="Actions\SaveStartupProjectGuidAction.cs" />
+    <Compile Include="Actions\SetGlobalValueAction.cs" />
+    <Compile Include="Actions\SetProjectLevelDependency.cs" />
+    <Compile Include="Actions\SetProjectStartup.cs" />
+    <Compile Include="Actions\ShowHelpAction.cs" />
+    <Compile Include="Actions\ShowUrlAction.cs" />
+    <Compile Include="Actions\UnfoldModuleProjectsAction.cs" />
+    <Compile Include="Actions\UpdateEventFireMethodAction.cs" />
+    <Compile Include="Converters\EventTopicPublicationValidator.cs" />
+    <Compile Include="Converters\EventTopicSubscriptionValidator.cs" />
+    <Compile Include="Converters\FolderSearchValidator.cs" />
+    <Compile Include="Converters\TypeNameValidator.cs" />
+    <Compile Include="Editors\EventTopicNameEditor.cs" />
+    <Compile Include="Editors\FolderChooser.cs" />
+    <Compile Include="Editors\WebServiceUrlEditor.cs" />
+    <Compile Include="Filters\IsServiceProxy.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Content Include="Templates\Projects\Module\LayoutView.resx">
+      <DependentUpon>LayoutView.cs.template</DependentUpon>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module.Business\Module.vstemplate">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module.Business\__TemplateIcon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module.Interface\Module.Interface.vstemplate">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module.Interface\__TemplateIcon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module\ModuleHandle.vstemplate">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module\Module.Layout.vstemplate">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Basic\ProfileCatalog.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Basic\Shell.vstemplate">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Basic\ShellForm.resx">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Items\Documentation\header.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Items\Documentation\Intro.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\Library.csproj.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\Library.vstemplate">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\__TemplateIcon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Module\Module.vstemplate">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Module\__TemplateIcon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Basic\__TemplateIcon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.LayoutModule\ShellLayoutView.resx">
+      <DependentUpon>ShellLayoutView.cs.template</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.LayoutModule\Shell.Layout.vstemplate">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\ControlledWorkItem.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\EventArgs.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\Services\IWorkspaceLocatorService.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\Presenter.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\ServiceProxy.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\WorkItemController.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.LayoutModule\Shell.Layout.csproj.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.LayoutModule\__TemplateIcon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Extended\ShellForm.resx">
+      <DependentUpon>ShellForm.cs.template</DependentUpon>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Templates\Projects\Module.Interface\Constants\CommandNames.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module.Interface\Constants\EventTopicNames.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module.Interface\Constants\UIExtensionSiteNames.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module.Interface\Constants\WorkspaceNames.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module.Interface\Module.Interface.csproj.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Basic\ShellForm.Designer.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Basic\ShellForm.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Basic\ShellApplication.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Basic\Shell.csproj.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Basic\App.config.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Basic\Properties\AssemblyInfo.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Basic\Constants\WorkspaceNames.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Basic\Constants\UIExtensionSiteNames.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Basic\Constants\EventTopicNames.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Basic\Constants\CommandNames.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Module\ModuleController.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Module\Properties\AssemblyInfo.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Module\Module.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Module\Module.csproj.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\ActionAttribute.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\IWorkItemController.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\SolutionProfileV1.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\SolutionProfileV2.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\Commands\ISupportsTimeout.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\Commands\ICommand.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\Commands\CommandWithCallback.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\Commands\CommandQueue.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\Commands\Command.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.LayoutModule\ShellLayoutView.Designer.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Items\View\View.Designer.cs.t4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Items\View\View.cs.t4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Items\View\Presenter.cs.t4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Items\View\IView.cs.t4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\__TemplateIcon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Text\WebServiceProxy\ServiceWrapper.t4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Text\WebServiceProxy\ServiceProxy.t4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Text\WebServiceProxy\IServiceWrapper.t4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Text\WebServiceProxy\IServiceProxy.t4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Text\WebServiceProxy\CommandWithCallback.t4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Text\WebServiceProxy\Command.t4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\Properties\AssemblyInfo.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\Constants\WorkspaceNames.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\Constants\UIExtensionSiteNames.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\Constants\EventTopicNames.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\Constants\CommandNames.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\Infrastructure.csproj.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Extended\ShellForm.cs.template">
+      <SubType>Form</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Extended\ShellApplication.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Extended\Shell.csproj.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Extended\Properties\AssemblyInfo.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Extended\Constants\WorkspaceNames.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Extended\Constants\UIExtensionSiteNames.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Extended\Constants\EventTopicNames.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Extended\Constants\CommandNames.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Extended\App.config.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module\Properties\AssemblyInfo.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module\Constants\UIExtensionSiteNames.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module\Constants\EventTopicNames.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Items\ServiceAgent\IServiceAgent.t4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Items\ServiceAgent\ServiceAgent.t4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Items\ServiceAgent\ServiceAgent.Designer.t4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="References\AddAsyncWebServiceProxyRecipeReference.cs" />
+    <Compile Include="References\AddEventSubscriptionRecipeReference.cs" />
+    <Compile Include="References\CreateServiceAgentWrapperReference.cs" />
+    <Compile Include="References\ModuleTemplateReference.cs" />
+    <Compile Include="References\ViewTemplateReference.cs" />
+    <Compile Include="Services\ConditionalActionCoordinator.cs" />
+    <Compile Include="Services\VoidGatheringDataService.cs" />
+    <Compile Include="T4TemplateProcessor.cs" />
+    <Compile Include="T4Util.cs" />
+    <Content Include="Templates\Solutions\Projects\Shell.Extended\ShellForm.Designer.cs">
+      <DependentUpon>ShellForm.cs.template</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.LayoutModule\Module.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.LayoutModule\Properties\AssemblyInfo.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.LayoutModule\ShellLayoutView.cs.template">
+      <SubType>UserControl</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.LayoutModule\ShellLayoutViewPresenter.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\UI\WindowSmartpartInfo.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\UI\WindowWorkspace.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\UI\WindowWorkspaceSetting.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\EntLib\EventTopicExceptionFormatter.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\Properties\AssemblyInfo.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\Properties\Resources.Designer.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\Services\DependentModuleInfo.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\Services\DependentModuleLoaderService.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\Services\IDependentModuleInfo.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\Services\IModuleInfoStore.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\Services\IProfileCatalogService.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\Services\ISolutionProfileParser.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\Services\ModuleMetadataReflectionHelper.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\Services\ProfileCatalogModuleInfoStore.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\Services\SolutionProfileV1Parser.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\Services\SolutionProfileV2Parser.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\Services\WebServiceCatalogModuleInfoStore.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\Services\WorkspaceLocatorService.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\Services\XmlStreamDependentModuleEnumerator.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\Services\XmlValidationHelper.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\SmartClientApplication.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\SolutionProfileV1.cs">
+      <DependentUpon>SolutionProfileV1.xsd</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\SolutionProfileV2.cs">
+      <DependentUpon>SolutionProfileV2.xsd</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\Services\EntityTranslatorException.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\Services\IActionCatalogService.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\Services\IActionCondition.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\Services\IEntityTranslator.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\Services\IEntityTranslatorService.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\Services\IImpersonationContext.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\Services\IImpersonationService.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\BuilderStrategies\ActionStrategy.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\Services\ActionCatalogService.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>
+      </SubType>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\Services\ActionCatalogException.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\Services\EntityTranslatorService.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module.Business\Properties\AssemblyInfo.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module.Business\ModuleController.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module.Business\Module.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module.Business\Module.csproj.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module.Business\BusinessModuleHandle.csproj.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module.Business\BusinessModuleHandle.vstemplate">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module.Business\Constants\CommandNames.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module.Business\Constants\EventTopicNames.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module.Business\Constants\UIExtensionSiteNames.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module.Business\Constants\WorkspaceNames.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Templates\Projects\Module.Interface\Properties\AssemblyInfo.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="Templates\Projects\Module\Constants\WorkspaceNames.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module\Module.Layout.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module\Constants\WorkspaceNames.Basic.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module\Constants\CommandNames.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module\Module.Basic.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module\ModuleHandle.csproj.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module\Module.Layout.csproj.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module\Module.Basic.csproj.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module\LayoutView.cs.template">
+      <SubType>UserControl</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module\LayoutView.Designer.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module\LayoutViewPresenter.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\EntityTranslators\BaseTranslator.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Library\EntityTranslators\EntityMapperTranslator.cs.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Compile Include="Utility.cs" />
+    <Compile Include="ValueProviders\ConditionalValueProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ValueProviders\SafeNameValueProvider.cs" />
+    <Compile Include="ValueProviders\FolderProvider.cs" />
+    <Compile Include="ValueProviders\GetGlobalValueProvider.cs" />
+    <Compile Include="ValueProviders\GetProjectByNameProvider.cs" />
+    <Compile Include="ValueProviders\GetProjectFromGuidProvider.cs" />
+    <Compile Include="ValueProviders\GetServiceProxyInterfaceProvider.cs" />
+    <Compile Include="ValueProviders\GetServiceInterfaceProvider.cs" />
+    <Compile Include="ValueProviders\ProjectCodeClassFromTypeNameProvider.cs" />
+    <Compile Include="ValueProviders\ProjectGuidProvider.cs" />
+    <Compile Include="ValueProviders\SelectTargetProjectProvider.cs" />
+    <Compile Include="ValueProviders\StartupProjectProvider.cs" />
+    <Compile Include="ValueProviders\TargetItemsCollectionProvider.cs" />
+    <Content Include="SmartClientDevelopment.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Items\ServiceAgent\ServiceAgent.vstemplate">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Items\ServiceAgent\__TemplateIcon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module\Module.Basic.vstemplate">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Module\__TemplateIcon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Extended\Shell.vstemplate">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Extended\ProfileCatalog.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Shell.Extended\__TemplateIcon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\Infrastructure.vstemplate">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\Projects\Infrastructure\__TemplateIcon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Solutions\SmartClient.vstemplate">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Library\Library.csproj">
+      <Project>{E754B7DA-2C3C-408B-A7B5-AC94D37C5B1A}</Project>
+      <Name>Library</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Templates\Projects\Module.Business\Services\" />
+    <Folder Include="Templates\Projects\Module.Business\Views\" />
+    <Folder Include="Templates\Projects\Module.Interface\Services\" />
+    <Folder Include="Templates\Projects\Module\Services\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
+  <!--<PropertyGroup>
+    <PostBuildEventDependsOn>$(PostBuildEventDependsOn);ComputePostBuildEvent</PostBuildEventDependsOn>
+  </PropertyGroup>
+  <Target Name="ComputePostBuildEvent">
+    <CreateProperty Value="&quot;$(TargetFrameworkDirectory)\installutil.exe&quot; /ShowCallStack /i /DesignMode=true /Configuration=&quot;$(TargetDir)SmartClientDevelopment.xml&quot; &quot;..\..\..\SmartClientDevelopmentInstaller\$(OutDir)SmartClientDevelopmentInstaller.dll&quot;&#xD;&#xA;">
+      <Output TaskParameter="ValueSetByTask" PropertyName="PostBuildEvent" />
+    </CreateProperty>
+  </Target>
+  <PropertyGroup>
+    <PostBuildEvent>
+      echo.
+    </PostBuildEvent>
+  </PropertyGroup>-->
+</Project>
